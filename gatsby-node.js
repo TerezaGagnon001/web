@@ -1,5 +1,10 @@
 import { resolve } from 'path'
-import { generateEventPages, generateOpportunityPages, generateProjectPages } from './src/page-generation'
+import {
+  generateContentPages,
+  generateEventPages,
+  generateOpportunityPages,
+  generateProjectPages,
+} from './src/page-generation'
 
 export function onCreateWebpackConfig({ actions }) {
   actions.setWebpackConfig({
@@ -13,4 +18,5 @@ export const createPages = async (args) => {
   await generateProjectPages(args)
   await generateEventPages(args)
   await generateOpportunityPages(args)
+  await generateContentPages(args)
 }

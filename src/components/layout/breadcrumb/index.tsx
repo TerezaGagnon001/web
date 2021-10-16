@@ -26,6 +26,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({
 
   const { firstCrumbs, lastCrumb } = transformCrumbs(crumbs)
 
+  let ix = 1;
   return (
     <S.OrderedList>
       <S.ListItem>
@@ -34,7 +35,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({
         </Link>
       </S.ListItem>
       {firstCrumbs.map((crumb) => (
-        <>
+        <span key={"breadcrumb" + ix++}>
           <S.Separator>/</S.Separator>
           <S.ListItem>
             {crumb.path ? (
@@ -45,7 +46,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({
               <S.Current>{crumb.label}</S.Current>
             )}
           </S.ListItem>
-        </>
+        </span>
       ))}
       <>
         <S.Separator>/</S.Separator>

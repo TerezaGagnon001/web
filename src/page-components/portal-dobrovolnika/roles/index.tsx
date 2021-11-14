@@ -12,7 +12,7 @@ interface RolesProps {
     roles: { nodes: Opportunity[] }
   }
   page: number
-  selectedSkills: { id: number, key: string }[]
+  selectedSkills: { id: number; key: string }[]
 }
 
 const RolesCountSpan = styled.span`
@@ -35,16 +35,17 @@ const Roles: React.FC<RolesProps> = (props) => {
       e.target.checked &&
       !newSelectedSkills.find((s) => s.id.toString() === e.target.name)
     ) {
-      let skillToAdd: { id: number, key: string } | undefined = allSkills.find((s) => s.id.toString() === e.target.name);
-      if(skillToAdd)
-        newSelectedSkills.push(skillToAdd);
+      const skillToAdd:
+        | { id: number; key: string }
+        | undefined = allSkills.find((s) => s.id.toString() === e.target.name)
+      if (skillToAdd) newSelectedSkills.push(skillToAdd)
     }
     if (
       !e.target.checked &&
       newSelectedSkills.find((s) => s.id.toString() === e.target.name)
     )
       newSelectedSkills.splice(
-        newSelectedSkills.map(s => s.id.toString()).indexOf(e.target.name),
+        newSelectedSkills.map((s) => s.id.toString()).indexOf(e.target.name),
         1
       )
 
@@ -76,7 +77,7 @@ const Roles: React.FC<RolesProps> = (props) => {
   }
 
   function getSkills() {
-    let toReturn: { id: number, key: string }[] = []
+    let toReturn: { id: number; key: string }[] = []
     let i = 0
     allRoles.forEach((r) => {
       r.skills &&
@@ -100,7 +101,8 @@ const Roles: React.FC<RolesProps> = (props) => {
 
   const allRoles = props.data.roles.nodes
   const allSkills = getSkills()
-  let filteredRoles: Opportunity[] = [], paginatedRoles: Opportunity[] = []
+  let filteredRoles: Opportunity[] = [],
+    paginatedRoles: Opportunity[] = []
   filterRoles()
 
   return (
@@ -118,9 +120,11 @@ const Roles: React.FC<RolesProps> = (props) => {
         <SectionContent>
           <Typography.Heading1>Filtr dle kompetencí</Typography.Heading1>
           {allSkills.map((s) => [
-            <CompetencyFilterLabel key={"competencyLabel" + s.id}>{s.key}</CompetencyFilterLabel>,
+            <CompetencyFilterLabel key={'competencyLabel' + s.id}>
+              {s.key}
+            </CompetencyFilterLabel>,
             <CompetencyFilterCheckbox
-              key={"competencyInput" + s.id}
+              key={'competencyInput' + s.id}
               type="checkbox"
               name={s.id.toString()}
               onChange={handleSkillSelectionChange}
